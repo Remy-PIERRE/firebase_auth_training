@@ -9,13 +9,15 @@ import { auth } from "../utils/firebase-config";
 function NavBar() {
   const { toggleModals } = useContext(UserContext);
 
+  /* instances */
   const navigate = useNavigate();
 
-  const signUpModal = () => {
+  /* handlers */
+  const signUpModalHandler = () => {
     toggleModals("signUp");
   };
 
-  const signInModal = () => {
+  const signInModalHandler = () => {
     toggleModals("signIn");
   };
 
@@ -28,6 +30,7 @@ function NavBar() {
     }
   };
 
+  /* render */
   return (
     <>
       <header className="bg-grey">
@@ -38,13 +41,13 @@ function NavBar() {
           <div>
             <button
               className="h-[30px] px-4 ml-4 text-white text-4 bg-green rounded-xl"
-              onClick={signUpModal}
+              onClick={signUpModalHandler}
             >
               Sign Up
             </button>
             <button
               className="h-[30px] px-4 ml-4 text-white text-4 bg-green rounded-xl"
-              onClick={signInModal}
+              onClick={signInModalHandler}
             >
               Sign In
             </button>

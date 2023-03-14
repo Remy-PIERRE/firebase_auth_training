@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+/* method from "firebase/auth" needed to create, sign in and listen any user change */
 import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
@@ -6,16 +7,15 @@ import {
 } from "firebase/auth";
 import { auth } from "../utils/firebase-config";
 
+/* create instance */
 export const UserContext = createContext();
 
 export function UserContextProvider(props) {
+  /* auth functions */
   const signUp = (email, psw) =>
     createUserWithEmailAndPassword(auth, email, psw);
 
   const signIn = (email, psw) => signInWithEmailAndPassword(auth, email, psw);
-
-  const [currentUser, setCurrentUser] = useState();
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsuscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -25,6 +25,10 @@ export function UserContextProvider(props) {
 
     return unsuscribe;
   }, []);
+
+  /* states */
+  const [currentUser, setCurrentUser] = useState();
+  const [loading, setLoading] = useState(true);
 
   /* modals */
   const [modalsState, setModalsState] = useState({

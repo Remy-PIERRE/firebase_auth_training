@@ -3,10 +3,11 @@ import { useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ModaleSignIn() {
+  /* instances */
   const { modalsState, toggleModals, signIn } = useContext(UserContext);
-
   const navigate = useNavigate();
 
+  /* refs */
   const inputs = useRef([]);
   const addInput = (element) => {
     if (element && !inputs.current.includes(element)) {
@@ -15,9 +16,11 @@ function ModaleSignIn() {
   };
   const formRef = useRef();
 
+  /* handlers */
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    /* signing in */
     try {
       const cred = await signIn(
         inputs.current[0].value,
@@ -35,6 +38,7 @@ function ModaleSignIn() {
     toggleModals("close");
   };
 
+  /* render */
   return (
     modalsState.signInModal && (
       <>

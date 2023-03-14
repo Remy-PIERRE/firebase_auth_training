@@ -3,12 +3,14 @@ import { useContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function ModaleSignUp() {
+  /* states */
   const [errorMessage, setErrorMessage] = useState("");
 
+  /* instances */
   const { modalsState, toggleModals, signUp } = useContext(UserContext);
-
   const navigate = useNavigate();
 
+  /* refs */
   const inputs = useRef([]);
   const addInput = (element) => {
     if (element && !inputs.current.includes(element)) {
@@ -17,9 +19,11 @@ function ModaleSignUp() {
   };
   const formRef = useRef();
 
+  /* handlers */
   const submitHandler = async (event) => {
     event.preventDefault();
 
+    /* check psw length and match */
     if (
       (inputs.current[1].value.length || inputs.current[2].value.length) < 6
     ) {
@@ -29,6 +33,7 @@ function ModaleSignUp() {
       return setErrorMessage("Passwords need to match !");
     }
 
+    /* creating user, if ok go to "/private/private-home" */
     try {
       const cred = await signUp(
         inputs.current[0].value,
@@ -46,6 +51,7 @@ function ModaleSignUp() {
     }
   };
 
+  /* reset ref, form, state before closing */
   const closeModalHandler = () => {
     formRef.current.reset();
     setErrorMessage("");
@@ -53,6 +59,7 @@ function ModaleSignUp() {
     toggleModals("close");
   };
 
+  /* render */
   return (
     modalsState.signUpModal && (
       <>

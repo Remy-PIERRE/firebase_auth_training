@@ -8,6 +8,7 @@ import { UserContextProvider } from "./context/UserContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
+    /* context need to wrap components then components can acces to it */
     <UserContextProvider>
       <App />
     </UserContextProvider>
